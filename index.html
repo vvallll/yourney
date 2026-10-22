@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yourney — Travel made around you</title>
+  <meta name="description" content="Yourney turns your answers into a trip designed around you: your pace, your interests, your kind of adventure.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- SVG sprite: logo globe + social icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-globe" viewBox="0 0 44 44">
+      <g fill="none" stroke="currentColor" stroke-width="1.1">
+        <circle cx="22" cy="22" r="20.5"/>
+        <ellipse cx="22" cy="22" rx="9" ry="20.5"/>
+        <line x1="22" y1="1.5" x2="22" y2="42.5"/>
+        <line x1="1.5" y1="22" x2="42.5" y2="22"/>
+        <path d="M5 11.5h34M5 32.5h34"/>
+      </g>
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 36 36">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="2" width="32" height="32" rx="9"/>
+        <circle cx="18" cy="18" r="7.5"/>
+      </g>
+      <circle cx="27.5" cy="8.5" r="1.6" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 36">
+      <path d="M15.5 34V20h4.5l.8-5.5h-5.3v-3.6c0-1.6.5-2.7 2.8-2.7h2.9V3.3c-.5-.1-2.2-.3-4.2-.3-4.1 0-6.9 2.5-6.9 7.1v4.4H5.5V20h4.6v14z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="site-header__bar">
+      <a href="#top" class="logo" aria-label="Yourney — home">
+        <svg class="logo__globe"><use href="#icon-globe"/></svg>
+        <span class="logo__word">yourney</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main">
+        <a href="#how-it-works">how it works</a>
+        <a href="#reviews">reviews</a>
+        <a href="#about">about us</a>
+        <a href="#contacts">contacts</a>
+      </nav>
+
+      <a href="#start" class="btn-paper btn-paper--sm">join an adventure</a>
+
+      <button class="burger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO / ABOUT ============ -->
+    <section class="hero" id="about">
+      <div class="container">
+        <h1 class="hero__title display" data-split>Travel made around you</h1>
+
+        <div class="hero__text" data-reveal>
+          <p>Forget endless tabs, saved posts, and trying to fit your trip into someone else’s itinerary.</p>
+          <p>Tell us what you want from your journey — how you like to travel, what you’re curious about, how much time you have, and what you’d rather avoid. We’ll turn it into a complete trip designed around you.</p>
+          <p class="hero__accent">Your pace. Your interests. Your kind of adventure.</p>
+          <p>From the first destination to the last dinner, every detail is thoughtfully put together so you can spend less time planning and more time looking forward to the journey.</p>
+        </div>
+
+        <div class="hero__gallery">
+          <figure class="hero__photo hero__photo--1" data-reveal>
+            <img src="images/hero-paris.jpg" alt="Stone bridge over the Seine in Paris" width="1200" height="775">
+          </figure>
+          <figure class="hero__photo hero__photo--2" data-reveal style="--delay:.1s">
+            <img src="images/hero-fuji-hiker.jpg" alt="Traveller looking at Mount Fuji" width="966" height="1200">
+          </figure>
+          <figure class="hero__photo hero__photo--3" data-reveal style="--delay:.2s">
+            <img src="images/hero-la-street.jpg" alt="Busy palm-lined street at sunset" width="736" height="552">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="band band--cta">
+      <div class="container band__inner">
+        <h2 class="band__title display" data-jitter>Join us now—pack later</h2>
+        <p class="band__subtitle" data-reveal>Your next adventure is closer than you think.</p>
+        <a href="#start" class="btn-paper btn-paper--lg btn-paper--sage" data-reveal>join an adventure</a>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how" id="how-it-works">
+      <div class="container">
+        <h2 class="section-title display" data-jitter>How it works</h2>
+        <p class="lead how__lead" data-reveal>Planning your next trip is easier than you think. Tell us what you’re looking for, and we’ll turn your answers into a journey made just for you.</p>
+
+        <ol class="steps">
+          <li class="step step--sage" data-reveal>
+            <span class="step__num">01.</span>
+            <div class="step__card">
+              <h3 class="step__title">Tell us about you</h3>
+              <p>Answer a few simple questions about your travel style, interests, budget, and what you want to experience.</p>
+            </div>
+          </li>
+          <li class="step step--dark" data-reveal style="--delay:.1s">
+            <span class="step__num">02.</span>
+            <div class="step__card">
+              <h3 class="step__title">We build your trip</h3>
+              <p>Our system turns your answers into a personalized journey, choosing destinations, stays, activities, and places that match you.</p>
+            </div>
+          </li>
+          <li class="step step--sage" data-reveal style="--delay:.2s">
+            <span class="step__num">03.</span>
+            <div class="step__card">
+              <h3 class="step__title">Make it yours</h3>
+              <p>Take a look and ask us to change anything that doesn’t feel quite right to shape the journey that feels completely yours.</p>
+            </div>
+          </li>
+          <li class="step step--dark" data-reveal style="--delay:.3s">
+            <span class="step__num">04.</span>
+            <div class="step__card">
+              <h3 class="step__title">Just go</h3>
+              <p>Everything is ready! All that’s left is to pack your bags and enjoy the journey. We have done everything for you.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PANORAMA ============ -->
+    <div class="panorama" aria-hidden="true">
+      <img src="images/fuji-lake.jpg" alt="" class="panorama__img" width="1199" height="899">
+    </div>
+
+    <!-- ============ DESTINATIONS ============ -->
+    <section class="destinations" id="destinations">
+      <div class="container">
+        <h2 class="section-title section-title--center display" data-jitter>Destinations</h2>
+        <p class="lead lead--center" data-reveal>A world of possibilities, waiting to be explored.</p>
+
+        <!-- countries + connecting lines are rendered by js/main.js -->
+        <div class="constellation" id="constellation">
+          <svg class="constellation__lines" aria-hidden="true"></svg>
+        </div>
+
+        <p class="destinations__more">and others…</p>
+      </div>
+    </section>
+
+    <!-- ============ REVIEWS ============ -->
+    <section class="band band--reviews" id="reviews">
+      <div class="container">
+        <h2 class="section-title section-title--light display" data-jitter>What our travelers say</h2>
+        <p class="lead lead--light" data-reveal>A world of possibilities, waiting to be explored.</p>
+
+        <div class="reviews">
+          <div class="reviews__col reviews__col--1">
+            <figure class="polaroid polaroid--yellow" style="--tilt:-2.7deg" data-reveal>
+              <img src="images/review-great-wall.jpg" alt="Traveller on the Great Wall of China" width="736" height="981">
+            </figure>
+            <blockquote class="review" data-reveal>
+              <p class="review__quote">“I honestly didn’t expect it to know me this well.”</p>
+              <p>I told it I wanted to see China without rushing from one place to another, and somehow it got the balance exactly right. The little food spots and quiet places it suggested ended up being some of my favorite memories from the whole trip.</p>
+              <cite>— Mia, China</cite>
+            </blockquote>
+          </div>
+
+          <div class="reviews__col reviews__col--2">
+            <blockquote class="review" data-reveal>
+              <p class="review__quote">“It felt like someone had planned it with me in my own mind.”</p>
+              <p>I wanted mountains, small towns, good food, and absolutely no packed sightseeing schedule. The trip through Austria was beautiful from beginning to end, and I never once felt like I was following a generic tourist itinerary.</p>
+              <cite>— Daniel, Austria</cite>
+            </blockquote>
+            <figure class="polaroid polaroid--beige" style="--tilt:1.6deg" data-reveal>
+              <img src="images/review-highlands.jpg" alt="Two friends sitting on a grassy mountain slope" width="735" height="490">
+            </figure>
+          </div>
+
+          <div class="reviews__col reviews__col--3">
+            <figure class="polaroid polaroid--sage" style="--tilt:4.5deg" data-reveal>
+              <img src="images/review-eiffel.jpg" alt="Traveller pretending to hold the top of the Eiffel Tower" width="736" height="487">
+            </figure>
+            <blockquote class="review" data-reveal>
+              <p class="review__quote">“Paris felt completely different this time.”</p>
+              <p>I’ve been to Paris before, so I didn’t want to do the usual checklist again. The itinerary gave me a mix of places I already knew I’d love and little spots I would never have found myself. It felt spontaneous, but somehow everything just worked.</p>
+              <cite>— Sophie, Paris</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ START YOUR JOURNEY ============ -->
+    <section class="start" id="start">
+      <div class="container">
+        <h2 class="section-title section-title--center display" data-jitter>Start your journey</h2>
+        <p class="lead lead--center start__lead" data-reveal>Create an account and tell us a little about yourself. Your perfect trip starts here.</p>
+
+        <div class="start__stage">
+          <figure class="polaroid polaroid--yellow start__photo start__photo--left" style="--tilt:-2.5deg" data-reveal>
+            <img src="images/journey-rome.jpg" alt="Couple in front of the Colosseum at night" width="488" height="512">
+          </figure>
+
+          <form class="signup" id="signup" novalidate data-reveal>
+            <label class="signup__label" for="first-name">First Name</label>
+            <input class="signup__input" id="first-name" name="firstName" type="text" placeholder="Valery" autocomplete="given-name" required>
+
+            <label class="signup__label" for="email">Email Address</label>
+            <input class="signup__input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+
+            <label class="signup__label" for="password">Password</label>
+            <input class="signup__input" id="password" name="password" type="password" placeholder="xxxxxxxxxxxx" autocomplete="new-password" required minlength="6">
+
+            <button type="submit" class="btn-paper btn-paper--sm signup__btn">join an adventure</button>
+          </form>
+
+          <figure class="polaroid polaroid--sage start__photo start__photo--right" style="--tilt:4deg" data-reveal>
+            <img src="images/journey-krabi.jpg" alt="Limestone cliffs over a tropical beach" width="736" height="552">
+          </figure>
+
+          <p class="start__login">already have an account? <a href="#start">log in</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer" id="contacts">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a href="#top" class="logo" aria-label="Yourney — back to top">
+          <svg class="logo__globe"><use href="#icon-globe"/></svg>
+          <span class="logo__word">yourney</span>
+        </a>
+
+        <label class="lang">
+          <span class="visually-hidden">Language</span>
+          <select name="lang">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+          </select>
+        </label>
+
+        <div class="socials">
+          <a href="#" aria-label="Yourney on Instagram"><svg class="socials__ig"><use href="#icon-instagram"/></svg></a>
+          <a href="#" aria-label="Yourney on Facebook"><svg class="socials__fb"><use href="#icon-facebook"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#how-it-works">how it works</a>
+        <a href="#reviews">reviews</a>
+        <a href="#about">about us</a>
+        <div class="footer-nav__contacts">
+          <a href="#contacts">contacts</a>
+          <ul class="contacts">
+            <li><a href="mailto:hello@yourney.travel">hello@yourney.travel</a></li>
+            <li><a href="tel:+79162208787">+7 916 220 87 87</a></li>
+            <li>Moscow, Russia</li>
+          </ul>
+          <p class="copyright">2026 Yourney. All rights reserved.</p>
+        </div>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
