@@ -49,7 +49,6 @@
       <nav class="main-nav" aria-label="Main">
         <a href="#how-it-works">how it works</a>
         <a href="#reviews">reviews</a>
-        <a href="#about">about us</a>
         <a href="#contacts">contacts</a>
       </nav>
 
@@ -65,7 +64,7 @@
 
     <!-- ============ HERO / ABOUT ============ -->
     <section class="hero" id="about">
-      <div class="container">
+      <div class="container container--narrow hero__inner">
         <h1 class="hero__title display" data-split>Travel made around you</h1>
 
         <div class="hero__text" data-reveal>
@@ -100,7 +99,7 @@
 
     <!-- ============ HOW IT WORKS ============ -->
     <section class="how" id="how-it-works">
-      <div class="container">
+      <div class="container container--narrow">
         <h2 class="section-title display" data-jitter>How it works</h2>
         <p class="lead how__lead" data-reveal>Planning your next trip is easier than you think. Tell us what you’re looking for, and we’ll turn your answers into a journey made just for you.</p>
 
@@ -211,7 +210,8 @@
             <img src="images/journey-rome.jpg" alt="Couple in front of the Colosseum at night" width="488" height="512">
           </figure>
 
-          <form class="signup" id="signup" novalidate data-reveal>
+          <!-- two states: "login" (default) and "signup" (adds Confirm Password) -->
+          <form class="signup" id="signup" data-mode="login" novalidate data-reveal>
             <label class="signup__label" for="first-name">First Name</label>
             <input class="signup__input" id="first-name" name="firstName" type="text" placeholder="Valery" autocomplete="given-name" required>
 
@@ -219,16 +219,32 @@
             <input class="signup__input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
 
             <label class="signup__label" for="password">Password</label>
-            <input class="signup__input" id="password" name="password" type="password" placeholder="xxxxxxxxxxxx" autocomplete="new-password" required minlength="6">
+            <input class="signup__input" id="password" name="password" type="password" placeholder="xxxxxxxxxxxx" autocomplete="current-password" required minlength="6">
 
-            <button type="submit" class="btn-paper btn-paper--sm signup__btn">join an adventure</button>
+            <div class="signup__extra" aria-hidden="true">
+              <div class="signup__extra-inner">
+                <div class="signup__extra-body">
+                  <label class="signup__label" for="password-confirm">Confirm Password</label>
+                  <input class="signup__input" id="password-confirm" name="passwordConfirm" type="password" placeholder="xxxxxxxxxxxx" autocomplete="new-password" required disabled>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-paper btn-paper--sm signup__btn">
+              <span class="swap" data-login="join an adventure" data-signup="start an adventure">join an adventure</span>
+            </button>
           </form>
 
           <figure class="polaroid polaroid--sage start__photo start__photo--right" style="--tilt:4deg" data-reveal>
             <img src="images/journey-krabi.jpg" alt="Limestone cliffs over a tropical beach" width="736" height="552">
           </figure>
 
-          <p class="start__login">already have an account? <a href="#start">log in</a></p>
+          <p class="start__login">
+            <span class="swap" data-login="don’t have an account?" data-signup="already have an account?">don’t have an account?</span>
+            <button type="button" class="start__switch" aria-controls="signup">
+              <span class="swap" data-login="sign up" data-signup="log in">sign up</span>
+            </button>
+          </p>
         </div>
       </div>
     </section>
@@ -261,7 +277,6 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#how-it-works">how it works</a>
         <a href="#reviews">reviews</a>
-        <a href="#about">about us</a>
         <div class="footer-nav__contacts">
           <a href="#contacts">contacts</a>
           <ul class="contacts">

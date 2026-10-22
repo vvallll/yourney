@@ -95,6 +95,44 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll("[data-reveal], [data-jitter]").forEach((el) => revealObserver.observe(el));
 
+/* ---------- how it works: the same number of lines in every card ----------
+   Finds the card whose text wraps into the most lines, then narrows
+   the text of the other cards until they wrap into as many lines. */
+const stepTexts = [...document.querySelectorAll(".step__card p")];
+let stepsWidth = 0;
+
+function lineCount(p) {
+  return Math.round(p.offsetHeight / parseFloat(getComputedStyle(p).lineHeight));
+}
+
+function equalizeSteps() {
+  stepTexts.forEach((p) => (p.style.maxWidth = ""));
+  const counts = stepTexts.map(lineCount);
+  const target = Math.max(...counts);
+
+  stepTexts.forEach((p, i) => {
+    if (counts[i] === target) return;
+    let lo = p.offsetWidth * 0.4;
+    let hi = p.offsetWidth;
+    // widest text box that still wraps into `target` lines
+    while (hi - lo > 1) {
+      const mid = (lo + hi) / 2;
+      p.style.maxWidth = `${mid}px`;
+      if (lineCount(p) >= target) lo = mid;
+      else hi = mid;
+    }
+    p.style.maxWidth = `${Math.floor(lo)}px`;
+  });
+}
+
+new ResizeObserver(([entry]) => {
+  const w = Math.round(entry.contentRect.width);
+  if (w === stepsWidth) return;
+  stepsWidth = w;
+  equalizeSteps();
+}).observe(document.querySelector(".steps"));
+document.fonts && document.fonts.ready.then(equalizeSteps);
+
 /* ---------- panorama parallax ---------- */
 const panorama = document.querySelector(".panorama");
 const panoramaImg = document.querySelector(".panorama__img");
@@ -124,44 +162,60 @@ if (!reduceMotion) {
 
 /* =========================================================
    DESTINATIONS — constellation map
-   Coordinates come from the Figma layout (1112 × 500 box).
-   On hover a country says "hello" in its own language
-   and its whole constellation lights up.
+   Star positions and line shapes are the ones from the Figma
+   layout (1112 × 500 box); the countries are grouped by region,
+   one constellation each. On hover a country says "hello" in
+   its own language and its whole constellation lights up.
    ========================================================= */
 const COUNTRIES = [
-  { name: "Greece",      x: 56,   y: 23.5,  hello: "Yassou",     lang: "Greek" },
-  { name: "Turkey",      x: 133,  y: 94.5,  hello: "Merhaba",    lang: "Turkish" },
-  { name: "Madagascar",  x: 311,  y: 63.5,  hello: "Salama",     lang: "Malagasy" },
-  { name: "Japan",       x: 340,  y: 154.5, hello: "Konnichiwa", lang: "Japanese" },
-  { name: "Egypt",       x: 581,  y: 43.5,  hello: "Ahlan",      lang: "Arabic" },
-  { name: "Italy",       x: 525,  y: 160.5, hello: "Ciao",       lang: "Italian" },
-  { name: "Vietnam",     x: 718,  y: 88.5,  hello: "Xin chào",   lang: "Vietnamese" },
-  { name: "Finland",     x: 880,  y: 107.5, hello: "Moi",        lang: "Finnish" },
-  { name: "Switzerland", x: 1026, y: 23.5,  hello: "Grüezi",     lang: "Swiss German" },
-  { name: "Portugal",    x: 970,  y: 179.5, hello: "Olá",        lang: "Portuguese" },
-  { name: "South Korea", x: 174,  y: 212.5, hello: "Annyeong",   lang: "Korean" },
-  { name: "Morocco",     x: 762,  y: 238.5, hello: "Salam",      lang: "Darija" },
-  { name: "Brazil",      x: 1064, y: 262.5, hello: "Oi, tudo bem?", lang: "Portuguese" },
-  { name: "France",      x: 45,   y: 295.5, hello: "Bonjour",    lang: "French" },
-  { name: "India",       x: 291,  y: 282.5, hello: "Namaste",    lang: "Hindi" },
-  { name: "Nepal",       x: 601,  y: 282.5, hello: "Namaskar",   lang: "Nepali" },
-  { name: "Iceland",     x: 447,  y: 321.5, hello: "Halló",      lang: "Icelandic" },
-  { name: "Thailand",    x: 872,  y: 347.5, hello: "Sawasdee",   lang: "Thai" },
-  { name: "Canada",      x: 245,  y: 392.5, hello: "Bonjour, hi!", lang: "French & English" },
-  { name: "Peru",        x: 490,  y: 412.5, hello: "Allillanchu", lang: "Quechua" },
-  { name: "New Zealand", x: 700,  y: 445.5, hello: "Kia ora",    lang: "Māori" },
-  { name: "Spain",       x: 1006, y: 445.5, hello: "¡Hola!",     lang: "Spanish" },
-  { name: "Norway",      x: 95,   y: 465.5, hello: "Hei",        lang: "Norwegian" },
-  { name: "Mexico",      x: 364,  y: 478.5, hello: "¿Qué onda?", lang: "Mexican Spanish" },
+  // Asia
+  { name: "Japan",       x: 56,   y: 23.5,  hello: "Konnichiwa",   lang: "Japanese" },
+  { name: "South Korea", x: 133,  y: 94.5,  hello: "Annyeong",     lang: "Korean" },
+  { name: "Vietnam",     x: 45,   y: 295.5, hello: "Xin chào",     lang: "Vietnamese" },
+  { name: "Thailand",    x: 245,  y: 392.5, hello: "Sawasdee",     lang: "Thai" },
+  { name: "India",       x: 95,   y: 465.5, hello: "Namaste",      lang: "Hindi" },
+  { name: "Nepal",       x: 364,  y: 478.5, hello: "Namaskar",     lang: "Nepali" },
+
+  // Americas
+  { name: "Canada",      x: 311,  y: 63.5,  hello: "Bonjour, hi!", lang: "French & English" },
+  { name: "Mexico",      x: 340,  y: 154.5, hello: "¿Qué onda?",   lang: "Mexican Spanish" },
+  { name: "Peru",        x: 291,  y: 282.5, hello: "Allillanchu",  lang: "Quechua" },
+  { name: "Brazil",      x: 174,  y: 212.5, hello: "Oi, tudo bem?", lang: "Portuguese" },
+
+  // Southern Europe
+  { name: "Greece",      x: 581,  y: 43.5,  hello: "Yassou",       lang: "Greek" },
+  { name: "Italy",       x: 525,  y: 160.5, hello: "Ciao",         lang: "Italian" },
+  { name: "Switzerland", x: 601,  y: 282.5, hello: "Grüezi",       lang: "Swiss German" },
+  { name: "France",      x: 447,  y: 321.5, hello: "Bonjour",      lang: "French" },
+  { name: "Spain",       x: 490,  y: 412.5, hello: "¡Hola!",       lang: "Spanish" },
+  { name: "Portugal",    x: 700,  y: 445.5, hello: "Olá",          lang: "Portuguese" },
+
+  // Northern Europe
+  { name: "Iceland",     x: 762,  y: 238.5, hello: "Halló",        lang: "Icelandic" },
+  { name: "Norway",      x: 880,  y: 107.5, hello: "Hei",          lang: "Norwegian" },
+  { name: "Finland",     x: 718,  y: 88.5,  hello: "Moi",          lang: "Finnish" },
+
+  // Middle East & Africa
+  { name: "Turkey",      x: 1026, y: 23.5,  hello: "Merhaba",      lang: "Turkish" },
+  { name: "Egypt",       x: 970,  y: 179.5, hello: "Ahlan",        lang: "Arabic" },
+  { name: "Morocco",     x: 1064, y: 262.5, hello: "Salam",        lang: "Darija" },
+  { name: "Kenya",       x: 1006, y: 445.5, hello: "Jambo",        lang: "Swahili" },
+  { name: "Madagascar",  x: 872,  y: 347.5, hello: "Salama",       lang: "Malagasy" },
 ];
 
 const LINKS = [
-  ["Greece", "Turkey"], ["Turkey", "France"], ["France", "Canada"],
-  ["Canada", "Norway"], ["Canada", "Mexico"],
-  ["Madagascar", "Japan"], ["Japan", "India"], ["South Korea", "India"],
-  ["Egypt", "Italy"], ["Italy", "Nepal"], ["Nepal", "Iceland"], ["Iceland", "Peru"],
-  ["Peru", "New Zealand"], ["New Zealand", "Morocco"], ["Morocco", "Finland"], ["Finland", "Vietnam"],
-  ["Switzerland", "Portugal"], ["Portugal", "Brazil"], ["Brazil", "Spain"], ["Spain", "Thailand"],
+  // Asia
+  ["Japan", "South Korea"], ["South Korea", "Vietnam"], ["Vietnam", "Thailand"],
+  ["Thailand", "India"], ["Thailand", "Nepal"],
+  // Americas
+  ["Canada", "Mexico"], ["Mexico", "Peru"], ["Peru", "Brazil"],
+  // Southern Europe
+  ["Greece", "Italy"], ["Italy", "Switzerland"], ["Switzerland", "France"],
+  ["France", "Spain"], ["Spain", "Portugal"],
+  // Northern Europe
+  ["Iceland", "Norway"], ["Norway", "Finland"],
+  // Middle East & Africa
+  ["Turkey", "Egypt"], ["Egypt", "Morocco"], ["Morocco", "Kenya"], ["Kenya", "Madagascar"],
 ];
 
 const MAP_W = 1112;
@@ -288,10 +342,42 @@ Object.values(nodes).forEach((node) => {
   node.el.addEventListener("blur", () => blurCountry(node));
 });
 
-/* ---------- sign-up form (front-end only for now) ---------- */
+/* ---------- log in / sign up form (front-end only for now) ---------- */
 const form = document.getElementById("signup");
 const toast = document.getElementById("toast");
+const formSwitch = document.querySelector(".start__switch");
+const extra = form.querySelector(".signup__extra");
+const confirmInput = form.passwordConfirm;
 let toastTimer;
+
+// every .swap element keeps its text for both states in data-login / data-signup
+function swapText(el, text) {
+  if (el.textContent === text) return;
+  if (reduceMotion) { el.textContent = text; return; }
+  el.classList.add("is-out");
+  setTimeout(() => {
+    el.textContent = text;
+    el.classList.remove("is-out");
+  }, 200);
+}
+
+function setMode(mode) {
+  form.dataset.mode = mode;
+  const signup = mode === "signup";
+
+  extra.setAttribute("aria-hidden", String(!signup));
+  confirmInput.disabled = !signup;
+  form.password.autocomplete = signup ? "new-password" : "current-password";
+
+  document.querySelectorAll("#start .swap").forEach((el) => swapText(el, el.dataset[mode]));
+  form.querySelectorAll(".signup__input").forEach((input) => input.classList.remove("is-invalid"));
+
+  if (signup) setTimeout(() => confirmInput.focus({ preventScroll: true }), 350);
+}
+
+formSwitch.addEventListener("click", () => {
+  setMode(form.dataset.mode === "login" ? "signup" : "login");
+});
 
 function showToast(message) {
   toast.textContent = message;
@@ -318,8 +404,18 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
+  const signup = form.dataset.mode === "signup";
+  if (signup && confirmInput.value !== form.password.value) {
+    void confirmInput.offsetWidth;
+    confirmInput.classList.add("is-invalid");
+    showToast("The passwords don’t match — try once more.");
+    return;
+  }
+
   const name = form.firstName.value.trim();
-  showToast(`Welcome aboard, ${name}! Your Yourney starts soon.`);
+  showToast(signup
+    ? `Welcome aboard, ${name}! Your Yourney starts soon.`
+    : `Welcome back, ${name}! Your next adventure is waiting.`);
   form.reset();
 });
 
