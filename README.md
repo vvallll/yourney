@@ -1,30 +1,36 @@
-# Yourney
+# ✦ Yourney
 
-**Travel made around you.** A landing page for Yourney, a made-up travel service that turns your answers into a trip designed around you.
+A landing page for Yourney, a travel service that turns your answers into a trip designed around you. ⋆｡°✩
 
-Plain HTML, CSS and a bit of vanilla JS. No build step.
+**⊹ Open it:** [Yourney](https://vvallll.github.io/yourney/)
 
-## Structure
+### ⊹ About the project
 
-```
-yourney/
-├── index.html        page markup
-├── css/style.css     all styles (palette, type scale, sections, responsive rules)
-├── js/main.js        interactions: header, scroll reveals, title jitter,
-│                     destinations constellation, parallax, sign-up form
-└── images/           photos, button paper texture, favicon
-```
+The service itself is **imaginary**: I designed the page in Figma first, then turned the design into a real website.
 
-## Run locally
+### ⊹ Features
 
-```bash
-python3 -m http.server 8080 --directory yourney
-```
+- ✦ The first screen fits the window, with the text and a photo collage side by side.
+- ✦ Destinations as five constellations, one per region: hover a country and it says hello in its own language.
+- ✦ Section titles twitch on hover, photos straighten up, and the sun rays on the paper buttons sway.
+- ✦ The log in form unfolds into sign up with a Confirm Password field.
+- ✦ Adapts to tablets and phones; a dedicated mobile design is on the way.
 
-Then open http://localhost:8080.
+### ⊹ How it's built
 
-## Design
+Plain HTML, CSS and a bit of vanilla JavaScript, with no build step and no dependencies; the fonts load from Google Fonts.
 
-- Palette: `#3C352F` · `#EBE8DD` · `#F0E2A4` · `#C5CEAE`
-- Fonts: Instrument Serif (headings), Instrument Sans (text), Source Sans 3 (UI: navigation, buttons, cards, reviews)
-- Laid out for a 1512px wide screen. On bigger screens it scales up a little, and on smaller ones the grids collapse. A dedicated mobile design is planned.
+- ✦ `index.html` · the page
+- ✦ `css/style.css` · palette, type scale, sections and responsive rules
+- ✦ `js/main.js` · animations, the destinations map and the form
+- ✦ `images/` · photos, the paper button texture and the tab icon
+
+### ୨୧ Design
+
+`#3C352F` · `#EBE8DD` · `#F0E2A4` · `#C5CEAE`
+
+`Instrument Serif` · `Instrument Sans` · `Source Sans 3`
+
+### ♡ A trip around you
+
+`Figma → HTML → CSS → a little animation → a trip made around you` ⊹
