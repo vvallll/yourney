@@ -334,10 +334,11 @@ section[id] { scroll-margin-top: 120px; }
   padding-block: clamp(12px, 3.5vh, 48px);
 }
 
-/* text on the left, photo collage on the right */
+/* text on the left, photo collage on the right.
+   The text column is exactly as wide as the one-line title. */
 .hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 24em) minmax(0, 1fr);
+  grid-template-columns: min-content minmax(0, 1fr);
   grid-template-areas:
     "title gallery"
     "text  gallery";
@@ -348,7 +349,7 @@ section[id] { scroll-margin-top: 120px; }
 .hero__text { grid-area: text; }
 
 .hero__title {
-  max-width: 7.6em;                    /* two lines: TRAVEL MADE / AROUND YOU */
+  white-space: nowrap;                 /* one line: sets the width of the text column */
   color: var(--dark);
 }
 
@@ -385,7 +386,7 @@ section[id] { scroll-margin-top: 120px; }
   grid-area: gallery;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.3fr 1fr;
+  grid-template-rows: 1.2fr 1fr;
   gap: 14px;
   contain: size;                       /* height comes from the text column, not the photos */
 }
@@ -665,28 +666,24 @@ section[id] { scroll-margin-top: 120px; }
   margin-top: 0;
   padding: 125px 0 105px;
 }
-/* a little more compact than the other sections */
-.band--reviews .container { width: min(var(--container) * .9, 100% - var(--gutter) * 2); }
 
 .band--reviews .lead { margin-top: 45px; }
 
 .reviews {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: clamp(48px, 5vw, 80px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(36px, 3.7vw, 60px);
   margin-top: 104px;
 }
 
 .reviews__col {
   display: flex;
   flex-direction: column;
-  max-width: clamp(270px, 19.2vw, 330px);
-  width: 100%;
 }
-.reviews .polaroid { width: clamp(260px, 18.52vw, 320px); }
-.reviews__col--1 { justify-self: start; }
-.reviews__col--2 { justify-self: center; padding-top: 28px; }
-.reviews__col--3 { justify-self: end; padding-top: 67px; }
+/* a bit narrower than the column, so the tilted frames keep clear of the next column */
+.reviews .polaroid { width: 92%; }
+.reviews__col--2 { padding-top: 28px; }
+.reviews__col--3 { padding-top: 67px; }
 
 .reviews__col--1 .review { margin-top: 70px; }
 .reviews__col--2 .polaroid { margin-top: 50px; }
@@ -978,7 +975,7 @@ section[id] { scroll-margin-top: 120px; }
 
 /* polaroids drop in with a bit of extra spin */
 .polaroid[data-reveal] { translate: 0 40px; rotate: 6deg; transition-property: opacity, translate, rotate, transform, box-shadow; }
-.polaroid[data-reveal].is-visible { rotate: 0deg; }
+.polaroid[data-reveal].is-visible { translate: 0 0; rotate: 0deg; }
 
 /* ---------- toast ---------- */
 .toast {
@@ -1008,16 +1005,10 @@ section[id] { scroll-margin-top: 120px; }
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-/* short laptop screens: a slightly wider text column keeps the first screen in view */
-@media (max-height: 720px) and (min-width: 901px) {
-  .hero__inner { grid-template-columns: minmax(0, 26em) minmax(0, 1fr); }
-}
-
 @media (max-width: 1200px) {
   .site-header { padding-inline: 24px; }
   .site-header__bar { gap: 28px; padding-inline: 28px; }
   .main-nav { gap: 26px; }
-  .reviews { column-gap: 56px; }
   .site-footer__inner { padding-inline: 37px; }
 }
 
@@ -1025,8 +1016,9 @@ section[id] { scroll-margin-top: 120px; }
   .steps { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
   .step__card p { max-width: 240px; }
 
-  .reviews { grid-template-columns: repeat(2, 1fr); row-gap: 60px; }
-  .reviews__col { justify-self: center !important; padding-top: 0 !important; }
+  .reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 60px; }
+  .reviews__col { justify-self: center; max-width: 320px; padding-top: 0 !important; }
+  .reviews .polaroid { width: min(280px, 100%); flex: none; }
   .reviews__col--3 { grid-column: 1 / -1; flex-direction: row; gap: 56px; max-width: 640px; align-items: center; }
   .reviews__col--3 .review { margin-top: 0; }
 
@@ -1039,6 +1031,7 @@ section[id] { scroll-margin-top: 120px; }
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "title" "text" "gallery";
   }
+  .hero__title { white-space: normal; }
   .hero__text { max-width: 29.32em; }
   .hero__gallery {
     contain: none;
