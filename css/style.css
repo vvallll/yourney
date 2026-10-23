@@ -1112,12 +1112,14 @@ h1, h2, h3, .review__quote, .signup__label { text-wrap: balance; }
 }
 
 .copyright {
+  max-width: 17em;                     /* the note sits in two short lines under the contacts */
   margin-top: auto;
   padding-top: 24px;
   font-family: var(--ui);
   font-size: var(--fs-fine);
+  line-height: 1.35;
   color: rgba(235, 232, 221, .72);
-  white-space: nowrap;
+  text-wrap: balance;
 }
 
 /* =========================================================
