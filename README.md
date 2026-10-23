@@ -14,7 +14,7 @@ The service itself is **imaginary**: I designed the page in Figma first, then tu
 - ✦ Destinations as five constellations, one per region: hover a country and it says hello in its own language.
 - ✦ Section titles twitch on hover, photos straighten up, and the sun rays on the paper buttons sway.
 - ✦ The log in form unfolds into sign up with a Confirm Password field.
-- ✦ Adapts to tablets and phones; a dedicated mobile design is on the way.
+- ✦ Fluid from phones to wide screens: every size grows smoothly, with tablet and phone layouts of their own.
 
 ### ⊹ How it's built
 
