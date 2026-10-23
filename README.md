@@ -12,7 +12,6 @@ The service itself is **imaginary**: I designed the page in Figma first, then tu
 
 ### ⊹ Features
 
-- ✦ The first screen fits the window, with the text and a photo collage side by side.
 - ✦ Destinations as five constellations, one per region: hover or tap a country and it says hello in its own language.
 - ✦ Section titles twitch, photos straighten up, and the sun rays on the paper buttons sway. On phones and tablets a tap does what the hover does.
 - ✦ The log in form unfolds into sign up with a Confirm Password field.
